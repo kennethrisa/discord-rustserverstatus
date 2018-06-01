@@ -37,7 +37,7 @@ config.json
 * npm install.
 * node app (In windows you have to open powershell).
 
-###### Windows only: Install the app as a windows service.
+### Windows only: Install the app as a windows service.
   - Open powershell: npm install
   - npm install -g node-windows
   - node installSVC.js
