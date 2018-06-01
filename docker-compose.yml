@@ -1,0 +1,11 @@
+version: '2'
+services:
+  bot:
+    build: .
+    image: kenrisa/discord-rustserverstatus
+    container_name: discord-rustserverstatus
+    restart: unless-stopped
+    environment:
+      - token=<your token>
+      - apiSite=1
+      - apiUrl=https://<full uri here>

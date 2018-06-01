@@ -1,0 +1,6 @@
+{ 
+  "debug" : false,
+  "token"  : "<your token here>",
+  "apiSite" : 1,
+  "apiUrl" : "https://<full uri here>"
+}
