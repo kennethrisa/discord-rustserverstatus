@@ -2,6 +2,7 @@
 
 [![Docker Automated build](https://img.shields.io/docker/automated/kenrisa/discord-rustserverstatus.svg)](https://hub.docker.com/r/kenrisa/discord-rustserverstatus/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kenrisa/discord-rustserverstatus.svg)](https://hub.docker.com/r/kenrisa/discord-rustserverstatus/)
+[![Docker Build Status](https://img.shields.io/docker/build/kenrisa/discord-rustserverstatus.svg)](https://hub.docker.com/r/kenrisa/discord-rustserverstatus/)
 
 
 ![Discord-bot](https://i.gyazo.com/23a3f95b758a146efa7d4a3dfd5f3999.png)
@@ -12,8 +13,8 @@ Written in nodejs and requires npm and nodejs.
 
 You can run it on windows, macOS, linux or docker, se the installation for more info.
 
-* Support rust-server.info
-* Support rust-server.net
+* Support rust-servers.info
+* Support rust-servers.net
 * Bot update status every 6 minutes
 
 # Configuration
@@ -27,8 +28,8 @@ config.json
 }
 ```
 * token = Your bot token from discord.
-* apiSite: To use rust-server.info, set apiSite = 1, rust-server.net, set apiSite = 2 in config.json
-* apiUrl: Use full url, for rust-server.info: example: https://api.rust-servers.info/status/106 and rust-server.net: https://rust-servers.net/api/?object=servers&element=detail&key={ServerKey}
+* apiSite: To use rust-servers.info, set apiSite = 1, rust-servers.net, set apiSite = 2 in config.json
+* apiUrl: Use full url, for rust-servers.info: example: https://api.rust-servers.info/status/106 and rust-servers.net: https://rust-servers.net/api/?object=servers&element=detail&key={ServerKey}
 
 # Installation:
 * Requires node ^8.0, runs on windows, macOS, linux and docker.
