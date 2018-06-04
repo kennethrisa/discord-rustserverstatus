@@ -14,7 +14,6 @@
   "private": "true",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.18.3",
     "discord.js": "^11.3.2",
     "request": "^2.87.0"
   },

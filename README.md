@@ -30,13 +30,21 @@ config.json
 * token = Your bot token from discord.
 * apiSite: To use rust-servers.info, set apiSite = 1, rust-servers.net, set apiSite = 2 in config.json
 * apiUrl: Use full url, for rust-servers.info: example: https://api.rust-servers.info/status/106 and rust-servers.net: https://rust-servers.net/api/?object=servers&element=detail&key={ServerKey}
+* Client secret is used to invite the bot to your server. Token is used for the bot to connect to discord.
 
 # Installation:
 * Requires node ^8.0, runs on windows, macOS, linux and docker.
 * For installation of nodejs, see here for instruction: https://nodejs.org/en/download/ or https://nodejs.org/en/download/package-manager/
-* Edit config.json and update the file with data.
-* npm install.
-* node app (In windows you have to open powershell).
+* Edit config.json and update the file with Bot token (Not Client secret!).
+1. Download it as zip or use git clone https://github.com/kennethrisa/discord-rustserverstatus.git
+2. Extract it and open folder, than open powershell in the same folder.
+3. Run command: npm install (This downloads the require modules from package.json)
+  3.  a: You can manualy do this with command: npm install discord.js request
+  3.  b: You should now see that you have a new folder node_modules.
+4. Open config.json and add your token from (Do not use client secret) https://discordapp.com/developers/applications/me/ and your url to rest api, see example above: apiUrl.
+![Discord-bot-token](https://i.gyazo.com/7a19e5d13171f192e0ea6de3a607777a.png)
+5. Now we can start the bot with command: node app.js and you should see that the bot is started, wait 6 min, and the status should be updated.
+
 
 ### Windows only: Install the app as a windows service.
   - Open powershell: npm install
