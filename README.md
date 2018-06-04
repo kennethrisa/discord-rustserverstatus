@@ -49,6 +49,7 @@ config.json
 ### Windows only: Install the app as a windows service.
   - Open powershell: npm install
   - npm install -g node-windows
+  - npm link node-windows
   - node installSVC.js
   - You will get some prompt to allow it to install, press yes on all.
   - Open services.msc and see discord-rustserverstatus is started. now it will always start on bootup.
