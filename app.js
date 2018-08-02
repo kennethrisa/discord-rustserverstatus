@@ -52,7 +52,9 @@ function updateActivity() {
 client.on("ready", () => {
   console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`);
   updateActivity();
-  setTimeout(updateActivity, updateInterval);
+  setInterval(function () {
+    updateActivity();
+  }, updateInterval);
 });
 
 client.on("guildCreate", guild => {
