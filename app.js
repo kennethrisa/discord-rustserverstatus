@@ -12,9 +12,10 @@ const client = new Discord.Client();
 
 function updateActivity() {
   if(apiSite == 1) {
-    request({ url: apiUrl, headers: { Referer: 'discord-rustserverstatus' }, timeout: 10000 }, function(error, response, body)
+    require("tls").DEFAULT_ECDH_CURVE = "auto"
+    request({ url: apiUrl, headers: { json: true, Referer: 'discord-rustserverstatus' }, timeout: 10000 }, function(err, res, body)
     {
-      if (!error && response.statusCode == 200)
+      if (!err && res.statusCode == 200)
       {
         const server = JSON.parse(body);
         const is_online = server.status;
