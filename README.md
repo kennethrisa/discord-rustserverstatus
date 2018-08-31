@@ -25,6 +25,7 @@ If you want to disable rcon mode set enableRcon to 0 in config.json
 
 example rcon command: !rcon say Hello world (and it will relay the command to server)
 
+# Bot
 
 Updates activity status on discord bot and displays how many players are connect to your rust server from rest api
 
@@ -122,5 +123,5 @@ docker-compose up -d
 ```
 
 # Credits
-[a link](https://github.com/Didstopia) Didstopia - i got his rcon code from his rust-server on github (Check this out if you want to run rust-server on docker)
+[Github](https://github.com/Didstopia) Didstopia - i got his rcon code from his rust-server on github (Check this out if you want to run rust-server on docker)
 
