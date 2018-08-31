@@ -1,6 +1,13 @@
 { 
   "debug" : false,
-  "token"  : "<your token here>",
+  "token"  : "your token here",
   "apiSite" : 1,
-  "apiUrl" : "https://<full uri here>"
+  "apiUrl" : "https://full uri here",
+  "enableRcon" : "1",
+  "rconhost"   : "",
+  "rconport"   : "",
+  "rconpass"   : "",
+  "prefix" : "!",
+  "roles"  : { 
+    "admins"   : ["Administrator", "admins"] }
 }

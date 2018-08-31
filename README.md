@@ -7,6 +7,26 @@
 
 ![Discord-bot](https://i.gyazo.com/23a3f95b758a146efa7d4a3dfd5f3999.png)
 
+# Release log
+
+v0.0.5 31.08.2018: 
+
+Added rcon support. 
+
+New config.json 
+
+npm install ws ( if you are upgradeing, or npm install - with new package.json)
+
+You can configre permission on what channel the bot should have access to on discord with roles.
+
+See config.json and add add the right roles so you have access to (prefix)!rcon command. default is Administrator or admins
+
+If you want to disable rcon mode set enableRcon to 0 in config.json
+
+example rcon command: !rcon say Hello world (and it will relay the command to server)
+
+# Bot
+
 Updates activity status on discord bot and displays how many players are connect to your rust server from rest api
 
 Written in nodejs and requires npm and nodejs.
@@ -22,9 +42,16 @@ config.json
 ```
 { 
   "debug" : false,
-  "token"  : "<your token here>",
+  "token"  : "your token here",
   "apiSite" : 1,
-  "apiUrl" : "https://<full uri here>"
+  "apiUrl" : "https://full uri here",
+  "enableRcon" : "1",
+  "rconhost"   : "",
+  "rconport"   : "",
+  "rconpass"   : "",
+  "prefix" : "!",
+  "roles"  : { 
+    "admins"   : ["Administrator", "admins"] }
 }
 ```
 * token = Your bot token from discord.
@@ -58,6 +85,11 @@ config.json
   - node uninstallSVC.js
   - Press yes on all prompts
 
+### Linux only: Start bot always using forever
+  - $ npm install forever -g
+  - $ forever start /path/to/app.js
+  - Someone named nimdasys on oxide reported it. Thanks
+
 # Create your discord-bot and invite it to your server:
 * https://github.com/reactiflux/discord-irc/wiki/Creating-a-discord-bot-&-getting-a-token
 * The token you have to configure in config.json.
@@ -69,6 +101,12 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
    -e token=<your token here> \
    -e apiSite=1 \
    -e apiUrl=https://<full uri here> \
+   -e enableRcon=1 \
+   -e rconhost=yourip \
+   -e rconport=28016 \
+   -e rconpass=yourpassword \
+   -e prefix=! \
+   -e roles=admins \
    kenrisa/discord-rustserverstatus:latest
 ```
 * Using docker-compose
@@ -83,4 +121,7 @@ git clone https://github.com/kennethrisa/discord-rustserverstatus.git
 docker-compose build
 docker-compose up -d
 ```
+
+# Credits
+[Github](https://github.com/Didstopia) Didstopia - i got his rcon code from his rust-server on github (Check this out if you want to run rust-server on docker)
 
