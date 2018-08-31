@@ -15,11 +15,11 @@ Added rcon support.
 
 New config.json 
 
-npm install ws ( if you are upgradeing, or npm install - with new package.json)
+npm install ws ( if you are upgradeing, or you can do: npm install - with new package.json)
 
-You can configre permission on what channel the bot should have access to on discord with roles.
+You can configure permission on what channel the bot should have access to on discord with roles.
 
-See config.json and add add the right roles so you have access to (prefix)!rcon command. default is Administrator or admins
+See config.json and add the right roles so you have access to (prefix)!rcon command. default is Administrator or admins
 
 If you want to disable rcon mode set enableRcon to 0 in config.json
 
