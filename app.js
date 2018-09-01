@@ -65,7 +65,7 @@ client.on("ready", () => {
 
 if (enableRcon == 1)
 	{
-		client.on("message", async message => {
+    client.on("message", async message => {
 
       if(message.author.bot) return;
       if(message.content.indexOf(prefix) !== 0) return;
