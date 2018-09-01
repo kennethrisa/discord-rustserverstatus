@@ -13,5 +13,5 @@ services:
       - rconhost=yourip
       - rconport=28016
       - rconpass="yourpassword"
-      - prefix="!""
+      - prefix="!"
       - roles="Administrator"
