@@ -6,12 +6,12 @@ services:
     container_name: discord-rustserverstatus
     restart: unless-stopped
     environment:
-      - token=your token
+      - token="your token"
       - apiSite=1
-      - apiUrl=https://full uri here
-      - enableRcon=1
+      - apiUrl="https://full uri here"
+      - enableRcon=0
       - rconhost=yourip
       - rconport=28016
-      - rconpass=yourpassword
-      - prefix=!
-      - roles=admins
+      - rconpass="yourpassword"
+      - prefix="!""
+      - roles="Administrator"

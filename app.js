@@ -75,7 +75,7 @@ if (enableRcon == 1)
     
     if(command === "rcon") {
       // Checks for discord permission
-      if(!message.member.roles.some(r=>roles.admins.includes(r.name)) )
+      if(!message.member.roles.some(r=>roles.includes(r.name)) )
         return message.reply("Sorry, you don't have permissions to use this!");
     
       var getMessage = args.join(" ");
