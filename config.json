@@ -8,6 +8,5 @@
   "rconport"   : "",
   "rconpass"   : "",
   "prefix" : "!",
-  "roles"  : { 
-    "admins"   : ["Administrator", "admins"] }
+  "roles"  :  ["Administrator", "admins"]
 }
