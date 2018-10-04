@@ -1,6 +1,11 @@
 # Release log
 
+v0.0.7 10.4.2018:
+
+Changelog upped to 0.0.7
+
 v0.0.6 10.4.2018:
+
 handle on error events.
 
 
