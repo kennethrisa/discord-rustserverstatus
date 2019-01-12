@@ -1,5 +1,9 @@
 # Release log
 
+v0.0.8 12.01.2018:
+
+Added battlemetrics api support, requested by cwizard
+
 v0.0.7 10.4.2018:
 
 Changelog upped to 0.0.7
