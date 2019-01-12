@@ -1,4 +1,11 @@
 # Release log
+v0.0.10 12.01.2018:
+
+Updated readme and upped version to 0.0.10
+
+v0.0.9 12.01.2018:
+
+Removed some debug message
 
 v0.0.8 12.01.2018:
 

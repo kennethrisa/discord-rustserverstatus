@@ -1,6 +1,6 @@
 {
   "name": "discord-rustserverstatus",
-  "version": "0.0.8",
+  "version": "0.0.10",
   "description": "Updates activity status on discord bot and displays how many players are connect to your rust server from rest api",
   "engines": {
     "node": ">=8.0"

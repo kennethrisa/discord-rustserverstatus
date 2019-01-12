@@ -9,7 +9,7 @@
 
 # Bot
 
-Updates activity status on discord bot and displays how many players are connect to your rust server from rest api and releay rcon commands to server.
+Updates activity status on discord bot and displays how many players are connect to your rust server from rest api and relay rcon commands to server.
 
 Written in nodejs and requires npm and nodejs.
 
