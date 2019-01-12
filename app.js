@@ -55,7 +55,6 @@ function updateActivity() {
                 const jsonData = JSON.parse(body);
                 const server = jsonData.data.attributes;
                 const is_online = server.status;
-                console.log(is_online)
                 if (is_online == "online") {
                     const players = server.players;
                     const maxplayers = server.maxPlayers;
