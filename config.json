@@ -3,7 +3,7 @@
   "token"  : "your token here",
   "apiSite" : 1,
   "apiUrl" : "https://full uri here",
-  "enableRcon" : "1",
+  "enableRcon" : "0",
   "rconhost"   : "",
   "rconport"   : "",
   "rconpass"   : "",
