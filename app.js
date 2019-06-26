@@ -4,11 +4,12 @@ const config = require("./config.json");
 const rcon = require("./rcon/app.js");
 
 const debug = process.env.debug || config.debug;
-const apiUrl = process.env.apiUrl || config.apiUrl; 
+const apiUrl = process.env.apiUrl || config.apiUrl;
 const apiSite = process.env.apiSite || config.apiSite;
 const enableRcon = process.env.enableRcon || config.enableRcon;
 const prefix = process.env.prefix || config.prefix;
 const roles = process.env.roles || config.roles;
+const queueMessage = proccess.env.queueMessage || config.queueMessage
 
 const updateInterval = (1000 * 60) * 3;
 
@@ -58,8 +59,13 @@ function updateActivity() {
                 if (is_online == "online") {
                     const players = server.players;
                     const maxplayers = server.maxPlayers;
+                    const queue = server.details.rust_queued_players;
+                    let status = `${players}/${maxplayers}`;
+                    if (queue != "0") {
+                        status += ` (${queue} ${queueMessage})`;
+                    }
                     if (debug) console.log("Updated from battlemetrics, serverid: " + server.id);
-                    return client.user.setActivity(`${players}/${maxplayers}`);
+                    return client.user.setActivity(status);
                 } else {
                     return client.user.setActivity("Offline");
                 }
@@ -82,28 +88,28 @@ if (enableRcon == 1) {
 
       if(message.author.bot) return;
       if(message.content.indexOf(prefix) !== 0) return;
-    
+
       var args = message.content.slice(prefix.length).trim().split(/ +/g);
       var command = args.shift().toLowerCase();
-    
+
     if(command === "rcon") {
       // Checks for discord permission
       if(!message.member.roles.some(r=>roles.includes(r.name)) )
         return message.reply("Sorry, you don't have permissions to use this!");
-    
+
       var getMessage = args.join(" ");
-      
+
       // Rcon message.
       argumentString = `${getMessage}`;
-      
+
       // Rcon Config
       rconhost = process.env.rconhost || config.rconhost;
       rconport = process.env.rconport || config.rconport;
       rconpass = process.env.rconpass || config.rconpass;
-      
+
       // Run rcon command.
       rcon.RconApp(argumentString, rconhost, rconport,rconpass, debug);
-      
+
       // Send message back to discord that we are trying to relay the command.
       message.channel.send(`Trying to relay command: ${getMessage}`);
       }

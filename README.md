@@ -24,7 +24,7 @@ You can run it on windows, macOS, linux or docker, se the installation for more 
 # Configuration
 config.json
 ```
-{ 
+{
   "debug" : false,
   "token"  : "your token here",
   "apiSite" : 1,
@@ -34,7 +34,8 @@ config.json
   "rconport"   : "",
   "rconpass"   : "",
   "prefix" : "!",
-  "roles"  :  ["Administrator", "admins"]
+  "roles"  :  ["Administrator", "admins"],
+  "queueMessage"  :  "currently waiting in queue."
 }
 ```
 * token = Your bot token from discord.
@@ -46,6 +47,7 @@ config.json
 * https://api.battlemetrics.com/servers/2559877 (add your serverid)
 * Client secret is used to invite the bot to your server. Token is used for the bot to connect to discord.
 * enableRcon must be 1 if you want to use rcon to send commands to your server.
+* queueMessage message to display after queue number. Only available using battlemetrics.
 
 # Installation:
 * Requires node ^8.0, runs on windows, macOS, linux and docker.
@@ -56,7 +58,7 @@ config.json
 3. Run command: npm install (This downloads the require modules from package.json)
   3.  a: You can manualy do this with command: npm install discord.js request ws
   3.  b: You should now see that you have a new folder node_modules.
-4. Open config.json and add your token from (Do not use client secret) https://discordapp.com/developers/applications/me/ 
+4. Open config.json and add your token from (Do not use client secret) https://discordapp.com/developers/applications/me/
 ![Discord-bot-token](https://i.gyazo.com/7a19e5d13171f192e0ea6de3a607777a.png)
 5. Now we can start the bot with command: node app.js and you should see that the bot is started, wait 6 min, and the status should be updated.
 
