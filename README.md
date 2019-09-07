@@ -97,6 +97,7 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
    -e rconpass="yourpassword" \
    -e prefix="!" \
    -e roles="Administrator" \
+   -e queueMessage="currently waiting in queue" \
    kenrisa/discord-rustserverstatus:latest
 ```
 * Using docker-compose
