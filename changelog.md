@@ -1,4 +1,9 @@
 # Release log
+v0.1.0 07.09.2019:
+
+Thanks for pull request for BM Que.
+If BM show that you have que, it will now also show it on bot.
+
 v0.0.10 12.01.2018:
 
 Updated readme and upped version to 0.0.10

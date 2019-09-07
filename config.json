@@ -1,4 +1,4 @@
-{ 
+{
   "debug" : false,
   "token"  : "your token here",
   "apiSite" : 1,
@@ -8,5 +8,6 @@
   "rconport"   : "",
   "rconpass"   : "",
   "prefix" : "!",
-  "roles"  :  ["Administrator", "admins"]
+  "roles"  :  ["Administrator", "admins"],
+  "queueMessage"  :  "currently waiting in queue."
 }
