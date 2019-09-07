@@ -9,7 +9,7 @@ const apiSite = process.env.apiSite || config.apiSite;
 const enableRcon = process.env.enableRcon || config.enableRcon;
 const prefix = process.env.prefix || config.prefix;
 const roles = process.env.roles || config.roles;
-const queueMessage = proccess.env.queueMessage || config.queueMessage
+const queueMessage = process.env.queueMessage || config.queueMessage
 
 const updateInterval = (1000 * 60) * 3;
 
