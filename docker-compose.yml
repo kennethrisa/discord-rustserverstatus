@@ -15,3 +15,4 @@ services:
       - rconpass="yourpassword"
       - prefix="!"
       - roles="Administrator"
+      - quoteMessage="currently waiting in queue."
