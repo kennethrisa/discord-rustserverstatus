@@ -7,12 +7,15 @@ services:
     restart: unless-stopped
     environment:
       - token="your token"
-      - apiSite=1
+      - apiSite=4
       - apiUrl="https://full uri here"
       - enableRcon=0
+      - serverIp=
+      - serverPort=28015
       - rconhost=yourip
       - rconport=28016
       - rconpass="yourpassword"
       - prefix="!"
       - roles="Administrator"
       - queueMessage="currently waiting in queue"
+      - updateInterval="3"
