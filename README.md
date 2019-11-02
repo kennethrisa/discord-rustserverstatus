@@ -3,7 +3,7 @@
 [![Docker Automated build](https://img.shields.io/docker/automated/kenrisa/discord-rustserverstatus.svg)](https://hub.docker.com/r/kenrisa/discord-rustserverstatus/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kenrisa/discord-rustserverstatus.svg)](https://hub.docker.com/r/kenrisa/discord-rustserverstatus/)
 [![Docker Build Status](https://img.shields.io/docker/build/kenrisa/discord-rustserverstatus.svg)](https://hub.docker.com/r/kenrisa/discord-rustserverstatus/)
-
+[![Build Status](https://dev.azure.com/kenrisa/discord-rustserverstatus/_apis/build/status/Azure%20Pipelines?branchName=master)](https://dev.azure.com/kenrisa/discord-rustserverstatus/_build/latest?definitionId=5&branchName=master)
 
 ![Discord-bot](https://i.gyazo.com/23a3f95b758a146efa7d4a3dfd5f3999.png)
 
@@ -103,7 +103,7 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
    -e prefix="!" \
    -e roles="Administrator" \
    -e queueMessage="currently waiting in queue" \
-   -e updateInterval="1" \
+   -e updateInterval="3" \
    kenrisa/discord-rustserverstatus:latest
 ```
 * Using docker-compose
