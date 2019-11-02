@@ -16,7 +16,7 @@ steps:
   displayName: 'npm install'
 
 - bash: |
-      timeout 1m npm start
+      timeout 20s npm start
       exit 0
   displayName: 'Testing apisite 1 config'
   env:
@@ -25,7 +25,7 @@ steps:
     apiUrl: '$(apiurl1)'
 
 - bash: |
-      timeout 1m npm start
+      timeout 20s npm start
       exit 0
   displayName: 'Testing apisite 2 config'
   env:
@@ -34,7 +34,7 @@ steps:
     apiUrl: '$(apiurl2)'
 
 - bash: |
-      timeout 1m npm start
+      timeout 20s npm start
       exit 0
   displayName: 'Testing apisite 3 config'
   env:
@@ -43,7 +43,7 @@ steps:
     apiUrl: '$(apiurl3)'
 
 - bash: |
-      timeout 1m npm start
+      timeout 20s npm start
       exit 0
   displayName: 'Testing apisite 4 config'
   env:
