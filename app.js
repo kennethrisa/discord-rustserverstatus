@@ -2,10 +2,13 @@ const Discord = require("discord.js");
 const request = require('request');
 const config = require("./config.json");
 const rcon = require("./rcon/app.js");
+const SourceQuery = require('sourcequery');
 
 const debug = process.env.debug || config.debug;
 const apiUrl = process.env.apiUrl || config.apiUrl;
 const apiSite = process.env.apiSite || config.apiSite;
+const serverIp = process.env.serverIp || config.serverIp;
+const serverPort = process.env.serverPort || config.serverPort;
 const enableRcon = process.env.enableRcon || config.enableRcon;
 const prefix = process.env.prefix || config.prefix;
 const roles = process.env.roles || config.roles;
@@ -71,6 +74,22 @@ function updateActivity() {
                 }
             }
         });
+    }
+    if (apiSite == 4) {
+        const sq = new SourceQuery(1000); // 1000ms timeout
+        sq.open(serverIp, serverPort);
+
+        sq.getInfo(function(err, info) {
+            if (err) { return client.user.setActivity("Offline"); }
+            else {
+                if (debug) { console.log('Server Info:', info); }
+                const players = info.players;
+                const maxplayers = info.maxplayers;
+                const status = `${players}/${maxplayers} players`;
+                return client.user.setActivity(status);
+          }
+        });
+    }
     }
 }
 
