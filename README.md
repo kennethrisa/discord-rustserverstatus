@@ -15,6 +15,7 @@ Written in nodejs and requires npm and nodejs.
 
 You can run it on windows, macOS, linux or docker, se the installation for more info.
 
+* Sourcequery
 * Supported api sites:
 * rust-servers.info
 * rust-servers.net
@@ -27,18 +28,22 @@ config.json
 {
   "debug" : false,
   "token"  : "your token here",
-  "apiSite" : 1,
+  "apiSite" : 4,
   "apiUrl" : "https://full uri here",
+  "serverIp": "",
+  "serverPort": "28015",
   "enableRcon" : "0",
   "rconhost"   : "",
   "rconport"   : "",
   "rconpass"   : "",
   "prefix" : "!",
   "roles"  :  ["Administrator", "admins"],
-  "queueMessage"  :  "currently waiting in queue."
+  "queueMessage"  :  "currently waiting in queue.",
+  "updateInterval" : "1"
 }
 ```
 * token = Your bot token from discord.
+* apiSite: To use sourcequery: apiSite = 4 and configure serverIP and serverPort
 * apiSite: To use rust-servers.info: apiSite = 1
 * apiSite: To use rust-servers.net: apiSite = 2
 * apiSite: To use battlemetrics.com: apiSite = 3
@@ -56,8 +61,8 @@ config.json
 1. Download it as zip or use git clone https://github.com/kennethrisa/discord-rustserverstatus.git
 2. Extract it and open folder, than open powershell in the same folder.
 3. Run command: npm install (This downloads the require modules from package.json)
-  3.  a: You can manualy do this with command: npm install discord.js request ws
-  3.  b: You should now see that you have a new folder node_modules.
+  1.  a: You can manualy do this with command: npm install discord.js request ws sourcequery
+  2.  b: You should now see that you have a new folder node_modules.
 4. Open config.json and add your token from (Do not use client secret) https://discordapp.com/developers/applications/me/
 ![Discord-bot-token](https://i.gyazo.com/7a19e5d13171f192e0ea6de3a607777a.png)
 5. Now we can start the bot with command: node app.js and you should see that the bot is started, wait 6 min, and the status should be updated.
@@ -98,6 +103,7 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
    -e prefix="!" \
    -e roles="Administrator" \
    -e queueMessage="currently waiting in queue" \
+   -e updateInterval="1" \
    kenrisa/discord-rustserverstatus:latest
 ```
 * Using docker-compose

@@ -11,5 +11,6 @@
   "rconpass"   : "",
   "prefix" : "!",
   "roles"  :  ["Administrator", "admins"],
-  "queueMessage"  :  "currently waiting in queue."
+  "queueMessage"  :  "currently waiting in queue.",
+  "updateInterval" : "3"
 }

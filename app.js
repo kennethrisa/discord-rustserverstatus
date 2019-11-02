@@ -13,8 +13,7 @@ const enableRcon = process.env.enableRcon || config.enableRcon;
 const prefix = process.env.prefix || config.prefix;
 const roles = process.env.roles || config.roles;
 const queueMessage = process.env.queueMessage || config.queueMessage
-
-const updateInterval = (1000 * 60) * 3;
+const updateInterval = (1000 * 60) * 3 || (1000 * 60) * process.env.updateInterval || (1000 * 60) * config.updateInterval
 
 const client = new Discord.Client();
 
@@ -76,20 +75,24 @@ function updateActivity() {
         });
     }
     if (apiSite == 4) {
-        const sq = new SourceQuery(1000); // 1000ms timeout
-        sq.open(serverIp, serverPort);
+        if (!serverIp || !serverPort) {
+            console.log("You have to configure serverIP/port")
+            process.exit()
+        } else {
+            const sq = new SourceQuery(1000); // 1000ms timeout
+            sq.open(serverIp, serverPort);
 
-        sq.getInfo(function(err, info) {
-            if (err) { return client.user.setActivity("Offline"); }
-            else {
-                if (debug) { console.log('Server Info:', info); }
-                const players = info.players;
-                const maxplayers = info.maxplayers;
-                const status = `${players}/${maxplayers} players`;
-                return client.user.setActivity(status);
-          }
-        });
-    }
+            sq.getInfo(function(err, info) {
+                if (err) { return client.user.setActivity("Offline"); }
+                else {
+                    if (debug) { console.log('Server Info: \nIP: %s\nPort: %s\nName: %s\nPlayers: %s/%s', serverIp, serverPort, info.name, info.players, info.maxplayers); }
+                    const players = info.players;
+                    const maxplayers = info.maxplayers;
+                    const status = `${players}/${maxplayers} players`;
+                    return client.user.setActivity(status);
+                }
+            });
+        }
     }
 }
 

@@ -18,3 +18,4 @@ services:
       - prefix="!"
       - roles="Administrator"
       - queueMessage="currently waiting in queue"
+      - updateInterval="3"
