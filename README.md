@@ -92,6 +92,15 @@ config.json
 
 # Docker
 ```
+Using sourcequery:
+docker run --name discord-rustserverstatus --restart=unless-stopped \
+   -e token="your token here" \
+   -e apiSite=4 \
+   -e serverIp=1.1.1.1 \
+   -e serverPort=28015 \
+   -e roles="Owner" \
+   kenrisa/discord-rustserverstatus:latest
+
 docker run --name discord-rustserverstatus --restart=unless-stopped \
    -e token="your token here" \
    -e apiSite=1 \
@@ -101,7 +110,7 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
    -e rconport=28016 \
    -e rconpass="yourpassword" \
    -e prefix="!" \
-   -e roles="Administrator" \
+   -e roles="Owner" \
    -e queueMessage="currently waiting in queue" \
    -e updateInterval="3" \
    kenrisa/discord-rustserverstatus:latest
