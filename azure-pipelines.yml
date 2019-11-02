@@ -15,32 +15,32 @@ steps:
       npm install
   displayName: 'npm install'
 
-- script: |
-      npm start
+- bash: |
+      timeout 1m npm start
   displayName: 'Testing apisite 1 config'
   env:
     token: '$(discord_token)'
     apiSite: '$(apisite1)'
     apiUrl: '$(apiurl1)'
 
-- script: |
-      npm start
+- bash: |
+      timeout 1m npm start
   displayName: 'Testing apisite 2 config'
   env:
     token: '$(discord_token)'
     apiSite: '$(apisite2)'
     apiUrl: '$(apiurl2)'
 
-- script: |
-      npm start
+- bash: |
+      timeout 1m npm start
   displayName: 'Testing apisite 3 config'
   env:
     token: '$(discord_token)'
     apiSite: '$(apisite3)'
     apiUrl: '$(apiurl3)'
 
-- script: |
-      npm start
+- bash: |
+      timeout 1m npm start
   displayName: 'Testing apisite 4 config'
   env:
     token: '$(discord_token)'
