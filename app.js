@@ -7,6 +7,12 @@ const fs = require('fs');
 const configdir = './config';
 const maxServers = 10;
 
+// Create dir if not exist
+if (!fs.existsSync(configdir)){
+    fs.mkdirSync(configdir);
+}
+
+// Create config file if not exist
 fs.readdir(configdir, (err, files) => {
     try {
         if (files.length < 1 )
@@ -118,7 +124,7 @@ fs.readdir(configdir, (err, files) => {
         try {
             var config = require("./config/server"+i+".json");
         } catch (error) {
-            console.log(error)
+
         }
         const client = new Discord.Client()
 
