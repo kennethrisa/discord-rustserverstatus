@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "description": "Updates activity status on discord bot and displays how many players are connect to your rust server from sourcequery or rest api",
   "engines": {
-    "node": ">=8.0"
+    "node": ">=12.0"
   },
   "main": "app.js",
   "scripts": {
@@ -14,12 +14,12 @@
   "private": true,
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^11.3.2",
-    "request": "^2.88.0",
+    "discord.js": "^12.2.0",
+    "request": "^2.88.2",
     "sourcequery": "0.0.2",
-    "ws": "^6.0.0"
+    "ws": "^7.2.5"
   },
   "devDependencies": {
-    "nodemon": "^1.18.4"
+    "nodemon": "^2.0.3"
   }
 }
