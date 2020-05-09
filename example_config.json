@@ -1,0 +1,16 @@
+{
+  "debug" : false,
+  "token"  : "your token here",
+  "apiSite" : 4,
+  "apiUrl" : "https://full uri here",
+  "serverIp": "",
+  "serverPort": "28015",
+  "enableRcon" : "0",
+  "rconhost"   : "",
+  "rconport"   : "",
+  "rconpass"   : "",
+  "prefix" : "!",
+  "roles"  :  ["Administrator", "admins"],
+  "queueMessage"  :  "currently waiting in queue.",
+  "updateInterval" : "3"
+}

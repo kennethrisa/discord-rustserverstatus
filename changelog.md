@@ -1,4 +1,51 @@
 # Release log
+v1.0.0 09.05.2020:
+## BREAKING CHANGES:
+* Requires node >= 12
+* New config setup (Config are now stored in config/serverX.json) where X = number of server 1-10
+* Support up 10 discord bots
+* Updated Docker file to node 12-slim
+
+Upgrade from v0.2.0:
+
+Download latest zip file from [here](https://github.com/kennethrisa/discord-rustserverstatus/releases)
+
+
+Backup your config.json file.<br>
+copy your config.json to a new folder config/server1.json<br>
+Overwrite the existing files with the files from the download zip file.<br>
+run npm start
+
+Remember to have upgraded to the latest nodejs version 12!
+
+start your application running: <br>
+npm install<br>
+npm start
+
+To create multiple bot, you copy your config server1.json to server2.json<br>
+Example tree of config:
+```
+discord-rustserverstatus
+└───config
+│   │   server1.json
+│   │   server2.json
+│   │   server3.json
+│   │   server5.json
+│   │   server6.json
+│   │   server7.json
+│   │   server8.json
+│   │   server9.json
+│   │   server10.json
+```
+
+If you are running docker, it will start as normal.<br>
+if you want to use more than 1 bot on docker, you will need to provide volume to docker. <br>
+Create the alle the config files you need, see example_config.json
+```
+  - ./config:/usr/src/app/config
+``` 
+---
+
 v0.1.0 07.09.2019:
 
 Thanks for pull request for BM Que.

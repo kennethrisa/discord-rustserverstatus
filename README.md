@@ -20,7 +20,11 @@ You can run it on windows, macOS, linux or docker, se the installation for more 
 * rust-servers.info
 * rust-servers.net
 * battlemetrics.com
-* Bot update status every 3 minutes
+* Bot update status every 1-3 minutes
+
+# Changelog
+
+[Changelog](/changelog.md)
 
 # Configuration
 config.json
@@ -55,7 +59,7 @@ config.json
 * queueMessage message to display after queue number. Only available using battlemetrics.
 
 # Installation:
-* Requires node ^8.0, runs on windows, macOS, linux and docker.
+* Requires node ^12.0, runs on windows, macOS, linux and docker.
 * For installation of nodejs, see here for instruction: https://nodejs.org/en/download/ or https://nodejs.org/en/download/package-manager/
 * Edit config.json and update the file with Bot token (Not Client secret!).
 1. Download it as zip or use git clone https://github.com/kennethrisa/discord-rustserverstatus.git
@@ -65,8 +69,14 @@ config.json
   2.  b: You should now see that you have a new folder node_modules.
 4. Open config.json and add your token from (Do not use client secret) https://discordapp.com/developers/applications/me/
 ![Discord-bot-token](https://i.gyazo.com/7a19e5d13171f192e0ea6de3a607777a.png)
-5. Now we can start the bot with command: node app.js and you should see that the bot is started, wait 6 min, and the status should be updated.
+5. Now we can start the bot with command: node app.js and you should see that the bot is started.
 
+### Install Windows only from command prompt
+  - Open powershell in the directory you downloaded: npm install
+  - npm start # (It will fail bc of config file does not exist and create an example one)
+  - It will now create a config file in folder config/server1.json
+  - Edit server1.json with all the information.
+  - Start the bot again: npm start
 
 ### Windows only: Install the app as a windows service.
   - Open powershell: npm install
@@ -102,7 +112,7 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
    kenrisa/discord-rustserverstatus:latest
 
 docker run --name discord-rustserverstatus --restart=unless-stopped \
-   -e token="your token here" \
+   -e token=your_token_here \
    -e apiSite=1 \
    -e apiUrl="https://full uri here" \
    -e enableRcon=1 \
@@ -120,6 +130,20 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
 git clone https://github.com/kennethrisa/discord-rustserverstatus.git
 docker-compose pull
 docker-compose up -d
+
+Using with volumes and support for multiple bots:
+Remove environment, and only have volumes:
+---
+version: '2'
+services:
+  bot:
+    build: .
+    image: kenrisa/discord-rustserverstatus
+    container_name: discord-rustserverstatus
+    restart: unless-stopped
+    volumes:
+      - ./config:/usr/src/app/config
+
 ```
 * You can also build the image your self using the docker-compose
 ```
