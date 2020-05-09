@@ -112,7 +112,7 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
    kenrisa/discord-rustserverstatus:latest
 
 docker run --name discord-rustserverstatus --restart=unless-stopped \
-   -e token="your token here" \
+   -e token=your_token_here \
    -e apiSite=1 \
    -e apiUrl="https://full uri here" \
    -e enableRcon=1 \
@@ -130,6 +130,20 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
 git clone https://github.com/kennethrisa/discord-rustserverstatus.git
 docker-compose pull
 docker-compose up -d
+
+Using with volumes and support for multiple bots:
+Remove environment, and only have volumes:
+---
+version: '2'
+services:
+  bot:
+    build: .
+    image: kenrisa/discord-rustserverstatus
+    container_name: discord-rustserverstatus
+    restart: unless-stopped
+    volumes:
+      - ./config:/usr/src/app/config
+
 ```
 * You can also build the image your self using the docker-compose
 ```
