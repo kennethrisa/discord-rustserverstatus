@@ -96,7 +96,6 @@ for (var i = 1; i <= maxServers; i++){
     // End Functions
     
     const config = require("./config/server"+i+".json");
-    //const config = require("./config.json")
 
     const debug = process.env.debug || config.debug
     const apiUrl = process.env.apiUrl || config.apiUrl
@@ -112,7 +111,7 @@ for (var i = 1; i <= maxServers; i++){
     
 
     client.on("ready", () => {
-        console.log(`Bot has started, with ${client.users.size} users, in ${client.channels.size} channels of ${client.guilds.size} guilds.`)
+        console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`)
         updateActivity()
         setInterval(function () {
             updateActivity()
@@ -130,7 +129,7 @@ for (var i = 1; i <= maxServers; i++){
     
             if(command === "rcon") {
                 // Checks for discord permission
-                if(!message.member.roles.some(r=>roles.includes(r.name)) )
+                if(!message.member.roles.cache.some(r=>roles.includes(r.name)) )
                     return message.reply("Sorry, you don't have permissions to use this!")
             
                 var getMessage = args.join(" ")
@@ -164,6 +163,13 @@ for (var i = 1; i <= maxServers; i++){
     client.on('error', function (error) {
     if (debug) console.log(error)
     })
+
+    process.on('unhandledRejection', error => {
+        if (error.code == 'TOKEN_INVALID') 
+            return console.log("Error: An invalid token was provided.\nYou have maybe added client secret instead of BOT token.\nPlease set BOT token")
+        
+        return console.error('Unhandled promise rejection:', error);
+    });
     
     client.login(process.env.token || config.token)
 }
