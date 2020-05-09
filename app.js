@@ -118,7 +118,7 @@ fs.readdir(configdir, (err, files) => {
         try {
             var config = require("./config/server"+i+".json");
         } catch (error) {
-
+            console.log(error)
         }
         const client = new Discord.Client()
 
