@@ -27,7 +27,9 @@ You can run it on windows, macOS, linux or docker, se the installation for more 
 [Changelog](/changelog.md)
 
 # Configuration
-config.json
+example_config.json
+
+Location: config/serverX.json (default: config/server1.json)
 ```
 {
   "debug" : false,
@@ -67,7 +69,8 @@ config.json
 3. Run command: npm install (This downloads the require modules from package.json)
   1.  a: You can manualy do this with command: npm install discord.js request ws sourcequery
   2.  b: You should now see that you have a new folder node_modules.
-4. Open config.json and add your token from (Do not use client secret) https://discordapp.com/developers/applications/me/
+  3.  c: Start the bot npm start, and then close it, you will then see it has created a config file under /config/server1.json
+4. Open config/server1.json and add your token from (Do not use client secret) https://discordapp.com/developers/applications/me/
 ![Discord-bot-token](https://i.gyazo.com/7a19e5d13171f192e0ea6de3a607777a.png)
 5. Now we can start the bot with command: node app.js and you should see that the bot is started.
 
