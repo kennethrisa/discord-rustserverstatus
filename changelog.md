@@ -1,4 +1,11 @@
 # Release log
+v1.0.1
+# Support all battlemetrics games that have no queue
+
+Thanks to pridit for this PR.
+
+Allow all games on battlemetrics, that does not have queue in api.
+
 v1.0.0 09.05.2020:
 ## BREAKING CHANGES:
 * Requires node >= 12

@@ -1,4 +1,4 @@
-# Rust discord bot that displayes online players and rcon support
+# Discord bot that displayes online players
 
 [![Docker Automated build](https://img.shields.io/docker/automated/kenrisa/discord-rustserverstatus.svg)](https://hub.docker.com/r/kenrisa/discord-rustserverstatus/)
 [![Docker Pulls](https://img.shields.io/docker/pulls/kenrisa/discord-rustserverstatus.svg)](https://hub.docker.com/r/kenrisa/discord-rustserverstatus/)
@@ -9,7 +9,9 @@
 
 # Bot
 
-Updates activity status on discord bot and displays how many players are connect to your rust server from rest api and relay rcon commands to server.
+Updates activity status on discord bot and displays how many players are connected to your game server that support sourcequery / rest api sites and webrcon.
+
+This was first created for the game Rust, but it also now support any games that support sourcequery or from rest api from the sites below.
 
 Written in nodejs and requires npm and nodejs.
 
@@ -19,7 +21,7 @@ You can run it on windows, macOS, linux or docker, se the installation for more 
 * Supported api sites:
 * rust-servers.info
 * rust-servers.net
-* battlemetrics.com
+* battlemetrics.com (All games)
 * Bot update status every 1-3 minutes
 
 # Changelog
@@ -29,7 +31,7 @@ You can run it on windows, macOS, linux or docker, se the installation for more 
 # Configuration
 example_config.json
 
-Location: config/serverX.json (default: config/server1.json)
+Location: config/serverX.json (default on first startup: config/server1.json)
 ```
 {
   "debug" : false,
@@ -54,7 +56,7 @@ Location: config/serverX.json (default: config/server1.json)
 * apiSite: To use rust-servers.net: apiSite = 2
 * apiSite: To use battlemetrics.com: apiSite = 3
 * apiUrl: Use full url, for rust-servers.info: example: https://api.rust-servers.info/status/106 or
-* rust-servers.net: https://rust-servers.net/api/?object=servers&element=detail&key={ServerKey} or
+* rust-servers.net: https://rust-servers.net/api/?object=servers&element=detail&key=ServerKey or
 * https://api.battlemetrics.com/servers/2559877 (add your serverid)
 * Client secret is used to invite the bot to your server. Token is used for the bot to connect to discord.
 * enableRcon must be 1 if you want to use rcon to send commands to your server.
@@ -74,7 +76,7 @@ Location: config/serverX.json (default: config/server1.json)
 ![Discord-bot-token](https://i.gyazo.com/7a19e5d13171f192e0ea6de3a607777a.png)
 5. Now we can start the bot with command: node app.js and you should see that the bot is started.
 
-### Install Windows only from command prompt
+### Install Windows only from command prompt (Manuall start)
   - Open powershell in the directory you downloaded: npm install
   - npm start # (It will fail bc of config file does not exist and create an example one)
   - It will now create a config file in folder config/server1.json
