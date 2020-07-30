@@ -1,4 +1,12 @@
 # Release log
+v1.1.0
+# Add statusType to support status Watching.
+
+Add this to your config to change from "Playing" to "Watching"
+"statusType" : "WATCHING"
+If you have anything else or "empty" like this: it will have "Playing" as status. 
+"statusType" : ""
+
 v1.0.1
 # Support all battlemetrics games that have no queue
 
