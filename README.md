@@ -47,6 +47,7 @@ Location: config/serverX.json (default on first startup: config/server1.json)
   "prefix" : "!",
   "roles"  :  ["Administrator", "admins"],
   "queueMessage"  :  "currently waiting in queue.",
+  "statusType" : "",
   "updateInterval" : "1"
 }
 ```
@@ -127,6 +128,7 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
    -e prefix="!" \
    -e roles="Owner" \
    -e queueMessage="currently waiting in queue" \
+   -e statusType=""
    -e updateInterval="3" \
    kenrisa/discord-rustserverstatus:latest
 ```

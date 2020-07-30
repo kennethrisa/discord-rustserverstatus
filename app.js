@@ -52,7 +52,8 @@ fs.readdir(configdir, (err, files) => {
                             const players = server.players
                             const maxplayers = server.players_max
                             if (debug) console.log("Updated rust-servers.info")
-                            return client.user.setActivity(`${players}/${maxplayers}`)
+                            status = `${players}/${maxplayers}`
+                            return client.user.setActivity(status, { type: statusType })
                         } else {
                             return client.user.setActivity("Offline")
                         }
@@ -68,7 +69,8 @@ fs.readdir(configdir, (err, files) => {
                             const players = server.players
                             const maxplayers = server.maxplayers
                             if (debug) console.log("Updated rust-servers.net")
-                            return client.user.setActivity(`${players}/${maxplayers}`)
+                            let status = `${players}/${maxplayers}`
+                            return client.user.setActivity(status, { type: statusType })
                         } else {
                             return client.user.setActivity("Offline")
                         }
@@ -91,7 +93,7 @@ fs.readdir(configdir, (err, files) => {
                                 status += ` (${queue} ${queueMessage})`
                             }
                             if (debug) console.log("Updated from battlemetrics, serverid: " + server.id)
-                            return client.user.setActivity(status)
+                            return client.user.setActivity(status, { type: statusType })
                         } else {
                             return client.user.setActivity("Offline")
                         }
@@ -112,8 +114,8 @@ fs.readdir(configdir, (err, files) => {
                             if (debug) { console.log('Server Info: \nIP: %s\nPort: %s\nName: %s\nPlayers: %s/%s', serverIp, serverPort, info.name, info.players, info.maxplayers) }
                             const players = info.players
                             const maxplayers = info.maxplayers
-                            const status = `${players}/${maxplayers} players`
-                            return client.user.setActivity(status)
+                            let status = `${players}/${maxplayers}`
+                            return client.user.setActivity(status, { type: statusType })
                         }
                     })
                 }
@@ -138,6 +140,7 @@ fs.readdir(configdir, (err, files) => {
         const prefix = process.env.prefix || config.prefix
         const roles = process.env.roles || config.roles
         const queueMessage = process.env.queueMessage || config.queueMessage
+        const statusType = process.env.statusType || config.statusType
 
         client.on("ready", () => {
             console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`)
