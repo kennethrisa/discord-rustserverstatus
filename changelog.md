@@ -1,4 +1,14 @@
 # Release log
+
+v1.1.x
+# Update dependencies 
+
++ ws@7.4.5
++ discord.js@12.5.3
++ nodemon@2.0.7
+
+Upgrade Dockerfile to nodejs lts-slim
+
 v1.1.0
 # Add statusType to support status Watching.
 

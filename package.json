@@ -14,12 +14,12 @@
   "private": true,
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.2.0",
+    "discord.js": "^12.5.3",
     "request": "^2.88.2",
     "sourcequery": "0.0.2",
-    "ws": "^7.2.5"
+    "ws": "^7.4.5"
   },
   "devDependencies": {
-    "nodemon": "^2.0.3"
+    "nodemon": "^2.0.7"
   }
 }
