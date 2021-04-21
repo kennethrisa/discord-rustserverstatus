@@ -143,7 +143,6 @@ fs.readdir(configdir, (err, files) => {
         const statusType = process.env.statusType || config.statusType
 
         if (apiSite == 4 ) {
-            console.log("Set new UpdateInterVal")
             var updateInterval = (1000 * 1) * process.env.updateInterval || (1000 * 1) * config.updateInterval || (1000 * 60) * 3
         }
 
