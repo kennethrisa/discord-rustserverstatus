@@ -16,7 +16,7 @@ if (!fs.existsSync(configdir)){
 fs.readdir(configdir, (err, files) => {
     try {
         if (files.length < 1 )
-        var writeConfig = '{"debug":false,"token":"","apiSite":4,"apiUrl":"https://full uri here","serverIp":"","serverPort":"28015","enableRcon":"0","rconhost":"","rconport":"","rconpass":"","prefix":"!","roles":["Administrator","admins"],"queueMessage":"currently waiting in queue.","updateInterval":"3"}'
+        var writeConfig = '{"debug":false,"token":"","apiSite":4,"apiUrl":"https://full uri here","serverIp":"","serverPort":"28015","enableRcon":"0","rconhost":"","rconport":"","rconpass":"","prefix":"!","roles":["Administrator","admins"],"queueMessage":"currently waiting in queue.","updateInterval":"60"}'
         var jsonData = JSON.parse(writeConfig);
         
         fs.writeFile("config/server1.json", JSON.stringify(jsonData, null, 2), 'utf8', function (err) {
@@ -129,8 +129,8 @@ fs.readdir(configdir, (err, files) => {
 
         }
         const client = new Discord.Client()
-
-        const updateInterval = (1000 * 60) * 3 || (1000 * 60) * process.env.updateInterval || (1000 * 60) * config.updateInterval
+        
+        var updateInterval = (1000 * 60) * process.env.updateInterval || (1000 * 60) * config.updateInterval || (1000 * 60) * 3
         const debug = process.env.debug || config.debug
         const apiUrl = process.env.apiUrl || config.apiUrl
         const apiSite = process.env.apiSite || config.apiSite
@@ -142,8 +142,15 @@ fs.readdir(configdir, (err, files) => {
         const queueMessage = process.env.queueMessage || config.queueMessage
         const statusType = process.env.statusType || config.statusType
 
+        if (apiSite == 4 ) {
+            console.log("Set new UpdateInterVal")
+            var updateInterval = (1000 * 1) * process.env.updateInterval || (1000 * 1) * config.updateInterval || (1000 * 60) * 3
+        }
+
         client.on("ready", () => {
             console.log(`Bot has started, with ${client.users.cache.size} users, in ${client.channels.cache.size} channels of ${client.guilds.cache.size} guilds.`)
+            
+            if (debug) console.log("updateInterval: ",updateInterval)
             updateActivity()
             setInterval(function () {
                 updateActivity()
