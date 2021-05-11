@@ -4,52 +4,61 @@ trigger:
 
 pool:
   vmImage: 'ubuntu-latest'
+  fsn: 'fsn1'
+  armv7l: 'armv7l'
 
-steps:
-- task: NodeTool@0
-  inputs:
-    versionSpec: '12.x'
-  displayName: 'Install Node.js'
+stages:
+  - stage: Build
+    displayName: Build and Push
+    jobs:  
+    - job: Build
+      displayName: Build
+      pool: armv7l
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '12.x'
+        displayName: 'Install Node.js'
 
-- script: |
-      npm install
-      mkdir config
-      echo '{"debug":false,"token":"","apiSite":4,"apiUrl":"https://full uri here","serverIp":"","serverPort":"28015","enableRcon":"0","rconhost":"","rconport":"","rconpass":"","prefix":"!","roles":["Administrator","admins"],"queueMessage":"currently waiting in queue.","updateInterval":"3"}' > config/server1.json
-  displayName: 'npm install'
+      - script: |
+            npm install
+            mkdir config
+            echo '{"debug":false,"token":"","apiSite":4,"apiUrl":"https://full uri here","serverIp":"","serverPort":"28015","enableRcon":"0","rconhost":"","rconport":"","rconpass":"","prefix":"!","roles":["Administrator","admins"],"queueMessage":"currently waiting in queue.","updateInterval":"3"}' > config/server1.json
+        displayName: 'npm install'
 
-- bash: |
-      timeout 20s npm start
-      exit 0
-  displayName: 'Testing apisite 1 config'
-  env:
-    token: '$(discord_token)'
-    apiSite: '$(apisite1)'
-    apiUrl: '$(apiurl1)'
+      - bash: |
+            timeout 20s npm start
+            exit 0
+        displayName: 'Testing apisite 1 config'
+        env:
+          token: '$(discord_token)'
+          apiSite: '$(apisite1)'
+          apiUrl: '$(apiurl1)'
 
-- bash: |
-      timeout 20s npm start
-      exit 0
-  displayName: 'Testing apisite 2 config'
-  env:
-    token: '$(discord_token)'
-    apiSite: '$(apisite2)'
-    apiUrl: '$(apiurl2)'
+      - bash: |
+            timeout 20s npm start
+            exit 0
+        displayName: 'Testing apisite 2 config'
+        env:
+          token: '$(discord_token)'
+          apiSite: '$(apisite2)'
+          apiUrl: '$(apiurl2)'
 
-- bash: |
-      timeout 20s npm start
-      exit 0
-  displayName: 'Testing apisite 3 config'
-  env:
-    token: '$(discord_token)'
-    apiSite: '$(apisite3)'
-    apiUrl: '$(apiurl3)'
+      - bash: |
+            timeout 20s npm start
+            exit 0
+        displayName: 'Testing apisite 3 config'
+        env:
+          token: '$(discord_token)'
+          apiSite: '$(apisite3)'
+          apiUrl: '$(apiurl3)'
 
-- bash: |
-      timeout 20s npm start
-      exit 0
-  displayName: 'Testing apisite 4 config'
-  env:
-    token: '$(discord_token)'
-    apiSite: '$(apisite4)'
-    serverIp: '$(server)'
-    serverPort: '$(port)'
+      - bash: |
+            timeout 20s npm start
+            exit 0
+        displayName: 'Testing apisite 4 config'
+        env:
+          token: '$(discord_token)'
+          apiSite: '$(apisite4)'
+          serverIp: '$(server)'
+          serverPort: '$(port)'
