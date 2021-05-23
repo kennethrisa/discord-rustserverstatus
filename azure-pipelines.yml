@@ -5,7 +5,7 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
   fsn: 'fsn1'
-  armv7l: 'armv7l'
+  arm64: 'arm64'
 
 stages:
   - stage: Build
