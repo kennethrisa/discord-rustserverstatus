@@ -2,8 +2,6 @@
 
 exports.RconApp = function(){
 
-	const config = require("../config.json");
-
 	var args = process.argv.splice(process.execArgv.length + 2);
 	for (var i = 0; i < args.length; i++)
 	{
@@ -16,7 +14,7 @@ exports.RconApp = function(){
 		console.log("Error: Please specify an RCON command");
 	}
 	
-	const debug = process.env.debug || config.debug;
+	const debug = process.env.debug || false;
 	
 	var serverHostname = rconhost;
 	var serverPort = rconport;
