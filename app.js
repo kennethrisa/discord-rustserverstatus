@@ -1,7 +1,7 @@
 const Discord = require("discord.js")
 const request = require('request')
 const rcon = require("./rcon/app.js")
-const SourceQuery = require('sourcequery')
+const Gamedig = require('gamedig');
 const fs = require('fs');
 
 const configdir = './config';
@@ -105,19 +105,20 @@ fs.readdir(configdir, (err, files) => {
                     console.log("You have to configure serverIP/port")
                     process.exit()
                 } else {
-                    const sq = new SourceQuery(1000) // 1000ms timeout
-                    sq.open(serverIp, serverPort)
-
-                    sq.getInfo(function(err, info) {
-                        if (err) { return client.user.setActivity("Offline") }
-                        else {
-                            if (debug) { console.log('Server Info: \nIP: %s\nPort: %s\nName: %s\nPlayers: %s/%s', serverIp, serverPort, info.name, info.players, info.maxplayers) }
-                            const players = info.players
-                            const maxplayers = info.maxplayers
-                            let status = `${players}/${maxplayers}`
-                            return client.user.setActivity(status, { type: statusType })
-                        }
-                    })
+                    Gamedig.query({
+                        type: 'rust',
+                        host: serverIp,
+                        port: serverPort
+                    }).then((state) => {
+                        if (debug) { console.log(state); }
+                        const players = state.raw.numplayers
+                        const maxplayers = state.maxplayers
+                        let status = `${players}/${maxplayers}`
+                        return client.user.setActivity(status, { type: statusType })
+                    }).catch((error) => {
+                        console.log("Server is offline");
+                        return client.user.setActivity("Offline")
+                    });
                 }
             }
         }

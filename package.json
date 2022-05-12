@@ -16,7 +16,7 @@
   "dependencies": {
     "discord.js": "^12.2.0",
     "request": "^2.88.2",
-    "sourcequery": "0.0.2",
+    "gamedig": "^4.0.4",
     "ws": "^7.2.5"
   },
   "devDependencies": {
