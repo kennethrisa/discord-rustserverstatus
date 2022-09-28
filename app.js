@@ -16,7 +16,7 @@ if (!fs.existsSync(configdir)){
 fs.readdir(configdir, (err, files) => {
     try {
         if (files.length < 1 )
-        var writeConfig = '{"debug":"","token":"","apiSite":"","apiUrl":"","serverIp":"","serverPort":"","enableRcon":"","rconhost":"","rconport":"","rconpass":"","prefix":"","roles":[""],"queueMessage":"currently waiting in queue.","updateInterval":""}'
+        var writeConfig = '{"debug":false,"token":"","apiSite":"","apiUrl":"","serverIp":"","serverPort":"","enableRcon":"","rconhost":"","rconport":"","rconpass":"","prefix":"","roles":[""],"queueMessage":"currently waiting in queue.","updateInterval":""}'
         var jsonData = JSON.parse(writeConfig);
         
         fs.writeFile("config/server1.json", JSON.stringify(jsonData, null, 2), 'utf8', function (err) {

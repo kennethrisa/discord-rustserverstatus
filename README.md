@@ -9,11 +9,11 @@
 
 # Bot
 
-Updates activity status on discord bot and displays how many players are connected to your game server that support sourcequery / rest api sites and webrcon.
+Updates activity status on discord bot and displays how many players are connected to your game server that support gamedig / rest api sites and webrcon.
 
-This was first created for the game Rust, but it also now support any games that support sourcequery or from rest api from the sites below.
+This was first created for the game Rust, but it also now support any games that support gamedig or from rest api from the sites below.
 
-Written in nodejs and requires npm and nodejs.
+Written in nodejs and requires npm and nodejs version ^16.09.
 
 You can run it on windows, macOS, linux or docker, se the installation for more info.
 

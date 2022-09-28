@@ -6,6 +6,7 @@ services:
     container_name: discord-rustserverstatus
     restart: unless-stopped
     environment:
+      - debug=true
       - token=your_BOT_token
       - apiSite=4
       - apiUrl=https://full_uri_here
