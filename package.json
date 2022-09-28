@@ -1,9 +1,9 @@
 {
   "name": "discord-rustserverstatus",
-  "version": "v1.1.1",
+  "version": "v1.2.0",
   "description": "Updates activity status on discord bot and displays how many players are connect to your game server from sourcequery/rest api",
   "engines": {
-    "node": ">=12.0"
+    "node": ">=16.0"
   },
   "main": "app.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "private": true,
   "license": "ISC",
   "dependencies": {
-    "discord.js": "^12.2.0",
+    "discord.js": "^14.5.0",
     "request": "^2.88.2",
     "gamedig": "^4.0.4",
     "ws": "^7.2.5"

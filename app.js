@@ -1,4 +1,4 @@
-const Discord = require("discord.js")
+const { Client, GatewayIntentBits } = require("discord.js");
 const request = require('request')
 const rcon = require("./rcon/app.js")
 const Gamedig = require('gamedig');
@@ -16,7 +16,7 @@ if (!fs.existsSync(configdir)){
 fs.readdir(configdir, (err, files) => {
     try {
         if (files.length < 1 )
-        var writeConfig = '{"debug":false,"token":"","apiSite":4,"apiUrl":"https://full uri here","serverIp":"","serverPort":"28015","enableRcon":"0","rconhost":"","rconport":"","rconpass":"","prefix":"!","roles":["Administrator","admins"],"queueMessage":"currently waiting in queue.","updateInterval":"3"}'
+        var writeConfig = '{"debug":"","token":"","apiSite":"","apiUrl":"","serverIp":"","serverPort":"","enableRcon":"","rconhost":"","rconport":"","rconpass":"","prefix":"","roles":[""],"queueMessage":"currently waiting in queue.","updateInterval":""}'
         var jsonData = JSON.parse(writeConfig);
         
         fs.writeFile("config/server1.json", JSON.stringify(jsonData, null, 2), 'utf8', function (err) {
@@ -129,7 +129,13 @@ fs.readdir(configdir, (err, files) => {
         } catch (error) {
 
         }
-        const client = new Discord.Client()
+        const client = new Client({
+            intents: [
+              GatewayIntentBits.Guilds,
+              GatewayIntentBits.GuildMessages,
+              GatewayIntentBits.MessageContent,
+            ]
+        });
 
         const updateInterval = (1000 * 60) * 3 || (1000 * 60) * process.env.updateInterval || (1000 * 60) * config.updateInterval
         const debug = process.env.debug || config.debug
@@ -152,7 +158,7 @@ fs.readdir(configdir, (err, files) => {
         })
 
         if (enableRcon == 1) {
-            client.on("message", async message => {
+            client.on("messageCreate", (message) => {
         
                 if(message.author.bot) return
                 if(message.content.indexOf(prefix) !== 0) return
