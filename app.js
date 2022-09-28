@@ -1,7 +1,7 @@
-const Discord = require("discord.js")
+const { Client, GatewayIntentBits } = require("discord.js");
 const request = require('request')
 const rcon = require("./rcon/app.js")
-const SourceQuery = require('sourcequery')
+const Gamedig = require('gamedig');
 const fs = require('fs');
 
 const configdir = './config';
@@ -16,7 +16,7 @@ if (!fs.existsSync(configdir)){
 fs.readdir(configdir, (err, files) => {
     try {
         if (files.length < 1 )
-        var writeConfig = '{"debug":false,"token":"","apiSite":4,"apiUrl":"https://full uri here","serverIp":"","serverPort":"28015","enableRcon":"0","rconhost":"","rconport":"","rconpass":"","prefix":"!","roles":["Administrator","admins"],"queueMessage":"currently waiting in queue.","updateInterval":"3"}'
+        var writeConfig = '{"debug":false,"token":"","apiSite":"","apiUrl":"","serverIp":"","serverPort":"","enableRcon":"","rconhost":"","rconport":"","rconpass":"","prefix":"","roles":[""],"queueMessage":"currently waiting in queue.","updateInterval":""}'
         var jsonData = JSON.parse(writeConfig);
         
         fs.writeFile("config/server1.json", JSON.stringify(jsonData, null, 2), 'utf8', function (err) {
@@ -105,19 +105,20 @@ fs.readdir(configdir, (err, files) => {
                     console.log("You have to configure serverIP/port")
                     process.exit()
                 } else {
-                    const sq = new SourceQuery(1000) // 1000ms timeout
-                    sq.open(serverIp, serverPort)
-
-                    sq.getInfo(function(err, info) {
-                        if (err) { return client.user.setActivity("Offline") }
-                        else {
-                            if (debug) { console.log('Server Info: \nIP: %s\nPort: %s\nName: %s\nPlayers: %s/%s', serverIp, serverPort, info.name, info.players, info.maxplayers) }
-                            const players = info.players
-                            const maxplayers = info.maxplayers
-                            let status = `${players}/${maxplayers}`
-                            return client.user.setActivity(status, { type: statusType })
-                        }
-                    })
+                    Gamedig.query({
+                        type: 'rust',
+                        host: serverIp,
+                        port: serverPort
+                    }).then((state) => {
+                        if (debug) { console.log(state); }
+                        const players = state.raw.numplayers
+                        const maxplayers = state.maxplayers
+                        let status = `${players}/${maxplayers}`
+                        return client.user.setActivity(status, { type: statusType })
+                    }).catch((error) => {
+                        console.log("Server is offline");
+                        return client.user.setActivity("Offline")
+                    });
                 }
             }
         }
@@ -128,7 +129,13 @@ fs.readdir(configdir, (err, files) => {
         } catch (error) {
 
         }
-        const client = new Discord.Client()
+        const client = new Client({
+            intents: [
+              GatewayIntentBits.Guilds,
+              GatewayIntentBits.GuildMessages,
+              GatewayIntentBits.MessageContent,
+            ]
+        });
 
         const updateInterval = (1000 * 60) * 3 || (1000 * 60) * process.env.updateInterval || (1000 * 60) * config.updateInterval
         const debug = process.env.debug || config.debug
@@ -151,7 +158,7 @@ fs.readdir(configdir, (err, files) => {
         })
 
         if (enableRcon == 1) {
-            client.on("message", async message => {
+            client.on("messageCreate", (message) => {
         
                 if(message.author.bot) return
                 if(message.content.indexOf(prefix) !== 0) return

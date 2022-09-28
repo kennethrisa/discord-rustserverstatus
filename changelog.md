@@ -1,4 +1,15 @@
 # Release log
+v1.2.0
+# Breaking change
+
+Node version ^16.9 and discordjs version 14.x
+
+If using RCON - The bot requireds to allow "Message content intent" - You will find this in discord developer portal -> Applications -> Bot Name -> Message Content Intent
+
+- Updated Dockerfile to use image node:16.
+- Replaced sourcequery to gamedig (Thanks AustrixDev for PR).
+- Updated discordjs to v14 api.
+
 v1.1.0
 # Add statusType to support status Watching.
 

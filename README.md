@@ -9,15 +9,15 @@
 
 # Bot
 
-Updates activity status on discord bot and displays how many players are connected to your game server that support sourcequery / rest api sites and webrcon.
+Updates activity status on discord bot and displays how many players are connected to your game server that support gamedig / rest api sites and webrcon.
 
-This was first created for the game Rust, but it also now support any games that support sourcequery or from rest api from the sites below.
+This was first created for the game Rust, but it also now support any games that support gamedig or from rest api from the sites below.
 
-Written in nodejs and requires npm and nodejs.
+Written in nodejs and requires npm and nodejs version ^16.09.
 
 You can run it on windows, macOS, linux or docker, se the installation for more info.
 
-* Sourcequery
+* gamedig (All games)
 * Supported api sites:
 * rust-servers.info
 * rust-servers.net
@@ -52,7 +52,7 @@ Location: config/serverX.json (default on first startup: config/server1.json)
 }
 ```
 * token = Your bot token from discord.
-* apiSite: To use sourcequery: apiSite = 4 and configure serverIP and serverPort
+* apiSite: To use gamedig: apiSite = 4 and configure serverIP and serverPort
 * apiSite: To use rust-servers.info: apiSite = 1
 * apiSite: To use rust-servers.net: apiSite = 2
 * apiSite: To use battlemetrics.com: apiSite = 3
@@ -64,13 +64,13 @@ Location: config/serverX.json (default on first startup: config/server1.json)
 * queueMessage message to display after queue number. Only available using battlemetrics.
 
 # Installation:
-* Requires node ^12.0, runs on windows, macOS, linux and docker.
+* Requires node ^16.9, runs on windows, macOS, linux and docker.
 * For installation of nodejs, see here for instruction: https://nodejs.org/en/download/ or https://nodejs.org/en/download/package-manager/
 * Edit config.json and update the file with Bot token (Not Client secret!).
 1. Download it as zip or use git clone https://github.com/kennethrisa/discord-rustserverstatus.git
 2. Extract it and open folder, than open powershell in the same folder.
 3. Run command: npm install (This downloads the require modules from package.json)
-  1.  a: You can manualy do this with command: npm install discord.js request ws sourcequery
+  1.  a: You can manualy do this with command: npm install discord.js request ws gamedig
   2.  b: You should now see that you have a new folder node_modules.
   3.  c: Start the bot npm start, and then close it, you will then see it has created a config file under /config/server1.json
 4. Open config/server1.json and add your token from (Do not use client secret) https://discordapp.com/developers/applications/me/
@@ -108,13 +108,13 @@ Location: config/serverX.json (default on first startup: config/server1.json)
 
 # Docker
 ```
-Using sourcequery:
+Using gamedig:
 docker run --name discord-rustserverstatus --restart=unless-stopped \
    -e token="your token here" \
    -e apiSite=4 \
    -e serverIp=1.1.1.1 \
    -e serverPort=28015 \
-   -e roles="Owner" \
+   -e roles="Administrator" \
    kenrisa/discord-rustserverstatus:latest
 
 docker run --name discord-rustserverstatus --restart=unless-stopped \
@@ -126,7 +126,7 @@ docker run --name discord-rustserverstatus --restart=unless-stopped \
    -e rconport=28016 \
    -e rconpass="yourpassword" \
    -e prefix="!" \
-   -e roles="Owner" \
+   -e roles="Administrator" \
    -e queueMessage="currently waiting in queue" \
    -e statusType=""
    -e updateInterval="3" \
