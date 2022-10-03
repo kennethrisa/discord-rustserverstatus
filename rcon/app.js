@@ -63,7 +63,9 @@ exports.RconApp = function(){
 	});
 	ws.on('error', function(e)
 	{
-		return console.log(e);
+		console.log(e);
+		if (e.code === "HPE_INVALID_CONSTANT") { console.log("\nPlease check if password is correct.") }
+		return;
 	});
 	function createPacket(command)
 	{
