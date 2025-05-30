@@ -5,13 +5,7 @@
   "apiUrl" : "https://full uri here",
   "serverIp": "",
   "serverPort": "28015",
-  "enableRcon" : "0",
-  "rconhost"   : "",
-  "rconport"   : "",
-  "rconpass"   : "",
-  "prefix" : "!",
-  "roles"  :  ["Administrator", "admins"],
   "queueMessage"  :  "currently waiting in queue.",
   "statusType" : "",
-  "updateInterval" : "3"
+  "updateInterval" : "1"
 }
