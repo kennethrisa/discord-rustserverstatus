@@ -1,7 +1,4 @@
 trigger:
-- develop
-- master
-- dev
 - v1.3-dev
 
 pool:
