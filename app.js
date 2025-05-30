@@ -1,22 +1,19 @@
-const { Client, GatewayIntentBits } = require("discord.js");
-const request = require('request')
-const rcon = require("./rcon/app.js")
-const Gamedig = require('gamedig');
-const fs = require('fs');
+import { Client, GatewayIntentBits } from 'discord.js';
+import axios from 'axios';
+import { GameDig } from 'gamedig';
+import fs from 'fs';
 
 const configdir = './config';
 const maxServers = 10;
 
-// Create dir if not exist
 if (!fs.existsSync(configdir)){
     fs.mkdirSync(configdir);
 }
 
-// Create config file if not exist
 fs.readdir(configdir, (err, files) => {
     try {
         if (files.length < 1 )
-        var writeConfig = '{"debug":false,"token":"","apiSite":"","apiUrl":"","serverIp":"","serverPort":"","enableRcon":"","rconhost":"","rconport":"","rconpass":"","prefix":"","roles":[""],"queueMessage":"currently waiting in queue.","updateInterval":""}'
+        var writeConfig = '{"debug":false,"token":"","apiSite":"","apiUrl":"","serverIp":"","serverPort":"","queueMessage":"currently waiting in queue.","updateInterval":"1"}'
         var jsonData = JSON.parse(writeConfig);
         
         fs.writeFile("config/server1.json", JSON.stringify(jsonData, null, 2), 'utf8', function (err) {
@@ -42,82 +39,81 @@ fs.readdir(configdir, (err, files) => {
 
         // Functions
         function updateActivity() {
-            if (apiSite == 1) {
-                require("tls").DEFAULT_ECDH_CURVE = "auto"
-                request({ url: apiUrl, headers: { json: true, Referer: 'discord-rustserverstatus' }, timeout: 10000 }, function (err, res, body) {
-                    if (!err && res.statusCode == 200) {
-                        const server = JSON.parse(body)
-                        const is_online = server.status
-                        if (is_online == "Online") {
-                            const players = server.players
-                            const maxplayers = server.players_max
-                            if (debug) console.log("Updated rust-servers.info")
-                            status = `${players}/${maxplayers}`
-                            return client.user.setActivity(status, { type: statusType })
-                        } else {
-                            return client.user.setActivity("Offline")
-                        }
-                    }
-                })
-            }
             if (apiSite == 2) {
-                request({ url: apiUrl, headers: { Referer: 'discord-rustserverstatus' }, timeout: 10000 }, function (error, response, body) {
-                    if (!error && response.statusCode == 200) {
-                        const server = JSON.parse(body)
-                        const is_online = server.is_online
+                axios.get(apiUrl, {
+                    headers: { Referer: 'discord-rustserverstatus' },
+                    timeout: 10000
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        const server = response.data;
+                        const is_online = server.is_online;
                         if (is_online == 1) {
-                            const players = server.players
-                            const maxplayers = server.maxplayers
-                            if (debug) console.log("Updated rust-servers.net")
-                            let status = `${players}/${maxplayers}`
-                            return client.user.setActivity(status, { type: statusType })
+                            const players = server.players;
+                            const maxplayers = server.maxplayers;
+                            if (debug) console.log("Updated rust-servers.net");
+                            let status = `${players}/${maxplayers}`;
+                            return client.user.setActivity(status, { type: statusType });
                         } else {
-                            return client.user.setActivity("Offline")
+                            return client.user.setActivity("Offline");
                         }
                     }
                 })
+                .catch(error => {
+                    console.error('Error fetching data:', error.message);
+                });
             }
+
             if (apiSite == 3) {
-                require("tls").DEFAULT_ECDH_CURVE = "auto"
-                request({ url: apiUrl, headers: { json: true, Referer: 'discord-rustserverstatus' }, timeout: 10000 }, function (err, res, body) {
-                    if (!err && res.statusCode == 200) {
-                        const jsonData = JSON.parse(body)
-                        const server = jsonData.data.attributes
-                        const is_online = server.status
+                axios.get(apiUrl, {
+                    headers: { json: true, Referer: 'discord-rustserverstatus' },
+                    timeout: 10000
+                })
+                .then(response => {
+                    if (response.status === 200) {
+                        const jsonData = response.data;
+                        const server = jsonData.data.attributes;
+                        const is_online = server.status;
                         if (is_online == "online") {
-                            const players = server.players
-                            const maxplayers = server.maxPlayers
-                            const queue = server.details.rust_queued_players
-                            let status = `${players}/${maxplayers}`
+                            const players = server.players;
+                            const maxplayers = server.maxPlayers;
+                            const queue = server.details.rust_queued_players;
+                            let status = `${players}/${maxplayers}`;
                             if (typeof queue !== "undefined" && queue != "0") {
-                                status += ` (${queue} ${queueMessage})`
+                                status += ` (${queue} ${queueMessage})`;
                             }
-                            if (debug) console.log("Updated from battlemetrics, serverid: " + server.id)
-                            return client.user.setActivity(status, { type: statusType })
+                            if (debug) console.log("Updated from battlemetrics, serverid: " + server.id);
+                            return client.user.setActivity(status, { type: statusType });
                         } else {
-                            return client.user.setActivity("Offline")
+                            return client.user.setActivity("Offline");
                         }
                     }
                 })
+                .catch(error => {
+                    console.error('Error fetching data:', error.message);
+                });
             }
+
             if (apiSite == 4) {
                 if (!serverIp || !serverPort) {
-                    console.log("You have to configure serverIP/port")
-                    process.exit()
+                    console.log("You have to configure serverIP/port");
+                    process.exit();
                 } else {
-                    Gamedig.query({
+                    GameDig.query({
                         type: 'rust',
                         host: serverIp,
                         port: serverPort
-                    }).then((state) => {
+                    })
+                    .then((state) => {
                         if (debug) { console.log(state); }
-                        const players = state.raw.numplayers
-                        const maxplayers = state.maxplayers
-                        let status = `${players}/${maxplayers}`
-                        return client.user.setActivity(status, { type: statusType })
-                    }).catch((error) => {
+                        const players = state.numplayers;
+                        const maxplayers = state.maxplayers;
+                        let status = `${players}/${maxplayers}`;
+                        return client.user.setActivity(status, { type: statusType });
+                    })
+                    .catch((error) => {
                         console.log("Server is offline");
-                        return client.user.setActivity("Offline")
+                        return client.user.setActivity("Offline");
                     });
                 }
             }
@@ -125,7 +121,8 @@ fs.readdir(configdir, (err, files) => {
         // End Functions
 
         try {
-            var config = require("./config/server"+i+".json");
+            var data = fs.readFileSync("./config/server"+i+".json", "utf8");
+            var config = JSON.parse(data);
         } catch (error) {
 
         }
@@ -133,7 +130,6 @@ fs.readdir(configdir, (err, files) => {
             intents: [
               GatewayIntentBits.Guilds,
               GatewayIntentBits.GuildMessages,
-              GatewayIntentBits.MessageContent,
             ]
         });
 
@@ -143,9 +139,6 @@ fs.readdir(configdir, (err, files) => {
         const apiSite = process.env.apiSite || config.apiSite
         const serverIp = process.env.serverIp || config.serverIp
         const serverPort = process.env.serverPort || config.serverPort
-        const enableRcon = process.env.enableRcon || config.enableRcon
-        const prefix = process.env.prefix || config.prefix
-        const roles = process.env.roles || config.roles
         const queueMessage = process.env.queueMessage || config.queueMessage
         const statusType = process.env.statusType || config.statusType
 
@@ -156,40 +149,6 @@ fs.readdir(configdir, (err, files) => {
                 updateActivity()
             }, updateInterval)
         })
-
-        if (enableRcon == 1) {
-            client.on("messageCreate", (message) => {
-        
-                if(message.author.bot) return
-                if(message.content.indexOf(prefix) !== 0) return
-        
-                var args = message.content.slice(prefix.length).trim().split(/ +/g)
-                var command = args.shift().toLowerCase()
-        
-                if(command === "rcon") {
-                    // Checks for discord permission
-                    if(!message.member.roles.cache.some(r=>roles.includes(r.name)) )
-                        return message.reply("Sorry, you don't have permissions to use this!")
-                
-                    var getMessage = args.join(" ")
-                
-                    // Rcon message.
-                    argumentString = `${getMessage}`
-                
-                    // Rcon Config
-                    rconhost = process.env.rconhost || config.rconhost
-                    rconport = process.env.rconport || config.rconport
-                    rconpass = process.env.rconpass || config.rconpass
-            
-                    // Run rcon command.
-                    rcon.RconApp(argumentString, rconhost, rconport,rconpass, debug)
-                
-                    // Send message back to discord that we are trying to relay the command.
-                    message.channel.send(`Trying to relay command: ${getMessage}`)
-                }
-            })
-        }
-        else if (debug) console.log("Rcon mode disabled")
 
         client.on("guildCreate", guild => {
         console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`)

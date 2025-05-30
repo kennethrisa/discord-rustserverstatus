@@ -1,4 +1,18 @@
 # Release log
+
+v1.3.0
+# Breaking change
+
+Node version ^18.0
+
+- Update nodejs and discordjs gamedig.
+- Rewrite to use ES module.
+- Removed rcon support
+- Removed apisite 1.
+- Update dockerimage.
+- Cleanup readme.
+- Moved install section to Wiki.
+
 v1.2.0
 # Breaking change
 
