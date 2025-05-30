@@ -1,6 +1,8 @@
 trigger:
 - develop
 - master
+- dev
+- v1.3-dev
 
 pool:
   vmImage: 'ubuntu-latest'
@@ -8,23 +10,14 @@ pool:
 steps:
 - task: NodeTool@0
   inputs:
-    versionSpec: '12.x'
+    versionSpec: '22.x'
   displayName: 'Install Node.js'
 
 - script: |
       npm install
       mkdir config
-      echo '{"debug":false,"token":"","apiSite":4,"apiUrl":"https://full uri here","serverIp":"","serverPort":"28015","enableRcon":"0","rconhost":"","rconport":"","rconpass":"","prefix":"!","roles":["Administrator","admins"],"queueMessage":"currently waiting in queue.","updateInterval":"3"}' > config/server1.json
+      echo '{"debug":false,"token":"","apiSite":4,"apiUrl":"https://full uri here","serverIp":"","serverPort":"28015","queueMessage":"currently waiting in queue.","updateInterval":"1"}' > config/server1.json
   displayName: 'npm install'
-
-- bash: |
-      timeout 20s npm start
-      exit 0
-  displayName: 'Testing apisite 1 config'
-  env:
-    token: '$(discord_token)'
-    apiSite: '$(apisite1)'
-    apiUrl: '$(apiurl1)'
 
 - bash: |
       timeout 20s npm start
