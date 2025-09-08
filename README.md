@@ -1,3 +1,7 @@
+## 📦 Repository Archived
+
+This repository has been archived and is no longer maintained.
+
 # Discord bot that displayes online players
 
 [![Docker Automated build](https://img.shields.io/docker/automated/kenrisa/discord-rustserverstatus.svg)](https://hub.docker.com/r/kenrisa/discord-rustserverstatus/)
